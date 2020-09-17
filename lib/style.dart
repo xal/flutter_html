@@ -144,14 +144,6 @@ class Style {
   /// Default: null (no max lines limit)
   int textMaxLines;
 
-  /// Can be set only directly in Flutter, don't parsed from CSS
-  ///
-  /// Text line height in percents, for example 1.5 = 150%
-  ///
-  /// Inherited: yes,
-  /// Default: 1.0 (100%)
-  double textLineHeight;
-
   /// CSS attribute "`text-shadow`"
   ///
   /// Inherited: yes,
@@ -223,7 +215,6 @@ class Style {
     this.textDecorationThickness,
     this.textOverflow,
     this.textMaxLines,
-    this.textLineHeight,
     this.textShadow,
     this.verticalAlign,
     this.whiteSpace,
@@ -256,7 +247,6 @@ class Style {
       fontWeight: fontWeight,
       letterSpacing: letterSpacing,
       shadows: textShadow,
-      height: textLineHeight,
       wordSpacing: wordSpacing,
       height: lineHeight,
       //TODO background
@@ -298,7 +288,6 @@ class Style {
       textDecorationThickness: other.textDecorationThickness,
       textOverflow: other.textOverflow,
       textMaxLines: other.textMaxLines,
-      textLineHeight: other.textLineHeight,
       textShadow: other.textShadow,
       verticalAlign: other.verticalAlign,
       whiteSpace: other.whiteSpace,
@@ -330,7 +319,6 @@ class Style {
       listStylePosition: child.listStylePosition ?? listStylePosition,
       textOverflow: child.textOverflow ?? textOverflow,
       textMaxLines: child.textMaxLines ?? textMaxLines,
-      textLineHeight: child.textLineHeight ?? textLineHeight,
       textAlign: child.textAlign ?? textAlign,
       textShadow: child.textShadow ?? textShadow,
       whiteSpace: child.whiteSpace ?? whiteSpace,
@@ -362,7 +350,6 @@ class Style {
     double textDecorationThickness,
     TextOverflow textOverflow,
     int textMaxLines,
-    double textLineHeight,
     List<Shadow> textShadow,
     VerticalAlign verticalAlign,
     WhiteSpace whiteSpace,
@@ -399,7 +386,6 @@ class Style {
           textDecorationThickness ?? this.textDecorationThickness,
       textOverflow: textOverflow ?? this.textOverflow,
       textMaxLines: textMaxLines ?? this.textMaxLines,
-      textLineHeight: textLineHeight ?? this.textLineHeight,
       textShadow: textShadow ?? this.textShadow,
       verticalAlign: verticalAlign ?? this.verticalAlign,
       whiteSpace: whiteSpace ?? this.whiteSpace,
@@ -427,7 +413,6 @@ class Style {
     this.fontWeight = textStyle.fontWeight;
     this.letterSpacing = textStyle.letterSpacing;
     this.textShadow = textStyle.shadows;
-    this.textLineHeight = textStyle.height;
     this.wordSpacing = textStyle.wordSpacing;
     this.lineHeight = textStyle.height;
   }
