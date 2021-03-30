@@ -128,6 +128,22 @@ class Style {
   // TODO(Sub6Resources): Possibly base this more closely on the CSS attribute.
   double textDecorationThickness;
 
+  /// Can be set only directly in Flutter, don't parsed from CSS
+  ///
+  /// Clip text on overflow. Useful with textMaxLines
+  ///
+  /// Inherited: yes,
+  /// Default: null (no text overflow clipping)
+  TextOverflow textOverflow;
+
+  /// Can be set only directly in Flutter, don't parsed from CSS
+  ///
+  /// Limit Text and RichText widgets maximum lines useful with textOverflow
+  ///
+  /// Inherited: yes,
+  /// Default: null (no max lines limit)
+  int textMaxLines;
+
   /// CSS attribute "`text-shadow`"
   ///
   /// Inherited: yes,
@@ -197,6 +213,8 @@ class Style {
     this.textDecorationColor,
     this.textDecorationStyle,
     this.textDecorationThickness,
+    this.textOverflow,
+    this.textMaxLines,
     this.textShadow,
     this.verticalAlign,
     this.whiteSpace,
@@ -268,6 +286,8 @@ class Style {
       textDecorationColor: other.textDecorationColor,
       textDecorationStyle: other.textDecorationStyle,
       textDecorationThickness: other.textDecorationThickness,
+      textOverflow: other.textOverflow,
+      textMaxLines: other.textMaxLines,
       textShadow: other.textShadow,
       verticalAlign: other.verticalAlign,
       whiteSpace: other.whiteSpace,
@@ -301,6 +321,8 @@ class Style {
       textShadow: child.textShadow ?? textShadow,
       whiteSpace: child.whiteSpace ?? whiteSpace,
       wordSpacing: child.wordSpacing ?? wordSpacing,
+      textOverflow: child.textOverflow ?? textOverflow,
+      textMaxLines: child.textMaxLines ?? textMaxLines,
     );
   }
 
@@ -326,6 +348,8 @@ class Style {
     Color textDecorationColor,
     TextDecorationStyle textDecorationStyle,
     double textDecorationThickness,
+    TextOverflow textOverflow,
+    int textMaxLines,
     List<Shadow> textShadow,
     VerticalAlign verticalAlign,
     WhiteSpace whiteSpace,
@@ -360,6 +384,8 @@ class Style {
       textDecorationStyle: textDecorationStyle ?? this.textDecorationStyle,
       textDecorationThickness:
           textDecorationThickness ?? this.textDecorationThickness,
+      textOverflow: textOverflow ?? this.textOverflow,
+      textMaxLines: textMaxLines ?? this.textMaxLines,
       textShadow: textShadow ?? this.textShadow,
       verticalAlign: verticalAlign ?? this.verticalAlign,
       whiteSpace: whiteSpace ?? this.whiteSpace,

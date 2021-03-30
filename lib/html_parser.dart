@@ -734,6 +734,8 @@ class StyledText extends StatelessWidget {
       child: Text.rich(
         textSpan,
         style: style.generateTextStyle(),
+        overflow: style.textOverflow,
+        maxLines: style.textMaxLines,
         textAlign: style.textAlign,
         textDirection: style.direction,
         textScaleFactor: textScaleFactor,
