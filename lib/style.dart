@@ -119,6 +119,22 @@ class Style {
   /// Default: TextDecorationStyle.solid,
   TextDecorationStyle? textDecorationStyle;
 
+  /// Can be set only directly in Flutter, don't parsed from CSS
+  ///
+  /// Clip text on overflow. Useful with textMaxLines
+  ///
+  /// Inherited: yes,
+  /// Default: null (no text overflow clipping)
+  TextOverflow? textOverflow;
+
+  /// Can be set only directly in Flutter, don't parsed from CSS
+  ///
+  /// Limit Text and RichText widgets maximum lines useful with textOverflow
+  ///
+  /// Inherited: yes,
+  /// Default: null (no max lines limit)
+  int? textMaxLines;
+
   /// Loosely based on CSS attribute "`text-decoration-thickness`"
   ///
   /// Uses a percent modifier based on the font size.
@@ -197,6 +213,8 @@ class Style {
     this.textDecorationColor,
     this.textDecorationStyle,
     this.textDecorationThickness,
+    this.textOverflow,
+    this.textMaxLines,
     this.textShadow,
     this.verticalAlign,
     this.whiteSpace,
@@ -266,6 +284,8 @@ class Style {
       textDecorationColor: other.textDecorationColor,
       textDecorationStyle: other.textDecorationStyle,
       textDecorationThickness: other.textDecorationThickness,
+      textOverflow: other.textOverflow,
+      textMaxLines: other.textMaxLines,
       textShadow: other.textShadow,
       verticalAlign: other.verticalAlign,
       whiteSpace: other.whiteSpace,
@@ -282,15 +302,20 @@ class Style {
   }
 
   Style copyOnlyInherited(Style child) {
-    FontSize? finalFontSize = child.fontSize != null ?
-      fontSize != null && child.fontSize?.units == "em" ?
-        FontSize(child.fontSize!.size! * fontSize!.size!) : child.fontSize
-      : fontSize != null && fontSize!.size! < 0 ?
-        FontSize.percent(100) : fontSize;
-    LineHeight? finalLineHeight = child.lineHeight != null ?
-      child.lineHeight?.units == "length" ?
-        LineHeight(child.lineHeight!.size! / (finalFontSize == null ? 14 : finalFontSize.size!) * 1.2) : child.lineHeight
-      : lineHeight;
+    FontSize? finalFontSize = child.fontSize != null
+        ? fontSize != null && child.fontSize?.units == "em"
+            ? FontSize(child.fontSize!.size! * fontSize!.size!)
+            : child.fontSize
+        : fontSize != null && fontSize!.size! < 0
+            ? FontSize.percent(100)
+            : fontSize;
+    LineHeight? finalLineHeight = child.lineHeight != null
+        ? child.lineHeight?.units == "length"
+            ? LineHeight(child.lineHeight!.size! /
+                (finalFontSize == null ? 14 : finalFontSize.size!) *
+                1.2)
+            : child.lineHeight
+        : lineHeight;
     return child.copyWith(
       color: child.color ?? color,
       direction: child.direction ?? direction,
@@ -308,6 +333,8 @@ class Style {
       textShadow: child.textShadow ?? textShadow,
       whiteSpace: child.whiteSpace ?? whiteSpace,
       wordSpacing: child.wordSpacing ?? wordSpacing,
+      textOverflow: child.textOverflow ?? textOverflow,
+      textMaxLines: child.textMaxLines ?? textMaxLines,
     );
   }
 
@@ -332,6 +359,8 @@ class Style {
     TextDecoration? textDecoration,
     Color? textDecorationColor,
     TextDecorationStyle? textDecorationStyle,
+    TextOverflow? textOverflow,
+    int? textMaxLines,
     double? textDecorationThickness,
     List<Shadow>? textShadow,
     VerticalAlign? verticalAlign,
@@ -367,6 +396,8 @@ class Style {
       textDecorationStyle: textDecorationStyle ?? this.textDecorationStyle,
       textDecorationThickness:
           textDecorationThickness ?? this.textDecorationThickness,
+      textOverflow: textOverflow ?? this.textOverflow,
+      textMaxLines: textMaxLines ?? this.textMaxLines,
       textShadow: textShadow ?? this.textShadow,
       verticalAlign: verticalAlign ?? this.verticalAlign,
       whiteSpace: whiteSpace ?? this.whiteSpace,
@@ -425,6 +456,7 @@ class FontSize {
   factory FontSize.rem(double rem) {
     return FontSize(rem * 16 - 2, units: "rem");
   }
+
   // These values are calculated based off of the default (`medium`)
   // being 14px.
   //
